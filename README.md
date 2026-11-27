@@ -1083,3 +1083,6 @@ This project is licensed under the Creative Commons Attribution 4.0 Internationa
 
 ---
 *This repository is community-maintained and not affiliated with OpenAI.*
+
+
+Built with passion and caffeine.

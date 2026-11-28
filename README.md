@@ -1086,3 +1086,36 @@ This project is licensed under the Creative Commons Attribution 4.0 Internationa
 
 
 Built with passion and caffeine.
+
+
+## Metrics (Micrometer)
+
+awesome-gpt-image auto-instruments with Micrometer + Prometheus registry.
+
+### Custom Metric
+```java
+@Component
+public class OrderMetrics {
+    private final Counter ordersCreated;
+    private final Timer orderProcessing;
+
+    public OrderMetrics(MeterRegistry registry) {
+        this.ordersCreated = Counter.builder("orders.created")
+            .description("Total orders created")
+            .tag("source", "api")
+            .register(registry);
+        this.orderProcessing = Timer.builder("orders.processing")
+            .description("Time to process one order")
+            .register(registry);
+    }
+
+    public void orderCreated() { ordersCreated.increment(); }
+    public Timer.Sample startProcessing() { return Timer.start(registry); }
+}
+```
+
+### Prometheus Endpoint
+`/actuator/prometheus` — scrape every 15s.
+
+### Grafana Dashboard
+Import `monitoring/awesome-gpt-image.json` — ready-made with 30+ panels.
